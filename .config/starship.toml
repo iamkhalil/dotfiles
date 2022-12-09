@@ -1,34 +1,69 @@
-# Don't print a blank line between shell prompts
-add_newline = false
-
-# Sperate the prompt into two lines
-[line_break]
-disabled = false
-
-# Disable the package module, hiding it from the prompt completely
-[package]
-disabled = true
-
-# Timeout for commands executed by starship
-command_timeout = 100
-
-# Wait 10 milliseconds for starship to check files under the current directory.
-scan_timeout = 100
-
-[character]
-success_symbol = "[❯](bold green) "
-error_symbol = "[✗](bold red) "
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$git_metrics\
+$fill\
+$c\
+$python\
+$ocaml\
+$rust\
+$nodejs\
+$cmd_duration\
+$line_break\
+$character"""
 
 [directory]
+style = "blue"
 read_only = " "
-truncation_length = 5
-truncation_symbol = "…/"
+truncation_length = 4
+truncate_to_repo = false
+
+[fill]
+symbol = " "
+
+[character]
+success_symbol = "[❯](bold purple)"
+error_symbol = "[❯](bold red)"
+vicmd_symbol = "[❮](bold green)"
+
+[git_branch]
+symbol = " "
+format = "[$symbol$branch]($style) "
+style = "bright-black"
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+style = "bright-black"
+
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style) )'
+style = "cyan"
+
+[git_metrics]
+disabled = false
+
+[cmd_duration]
+format = "[$duration]($style)"
+style = "yellow"
 
 [c]
+format = "[$symbol($version(-$name) )]($style)"
 symbol = " "
 
-[golang]
-symbol = " "
-
 [python]
+format = "[$symbol($version )]($style)"
 symbol = " "
+
+[ocaml]
+format = "[$symbol($version )]($style)"
+
+[rust]
+format = "[$symbol($version )]($style)"
+symbol = " "
+
+[nodejs]
+format = "[$symbol($version )]($style)"
