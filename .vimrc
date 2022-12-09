@@ -3,32 +3,32 @@ set nocompatible
 filetype off
 syntax enable
 set encoding=utf-8
-set t_Co=256			    " Deal with colors
+set t_Co=256                " Deal with colors
 set number relativenumber
 set nobackup
 set noswapfile
 set cursorline
-set showmatch			    " Highight matching braces
-set noerrorbells		    " Disable annoying beeping
-set visualbell			    " Use a visual bell to notify us
-set wildmenu			    " Enable autocompletion in command mode
-set colorcolumn=80		    " Highlight 80 character limit
-set scrolloff=999		    " Keep the cursor centered in the screen
+set showmatch               " Highight matching braces
+set noerrorbells            " Disable annoying beeping
+set visualbell              " Use a visual bell to notify us
+set wildmenu                " Enable autocompletion in command mode
+set colorcolumn=80          " Highlight 80 character limit
+set scrolloff=999           " Keep the cursor centered in the screen
 
 " Copy/paste between vim and other programs
 set clipboard+=unnamedplus
 set mouse=r
 
 " Indentation
-set expandtab			    " Expand tabs to the proper type and size
-set tabstop=4 shiftwidth=4	" One tab == four spaces
+set expandtab               " Expand tabs to the proper type and size
+set tabstop=4 shiftwidth=4  " One tab == four spaces
 set softtabstop=4
-set autoindent			    " Use indentation of previous line
+set autoindent              " Use indentation of previous line
 
 " Search settings
 set incsearch
-set hlsearch			    " Highlight results
-set ignorecase smartcase	" Be smart about case sensitivity when searching
+set hlsearch                " Highlight results
+set ignorecase smartcase    " Be smart about case sensitivity when searching
 
 " vim-plug for managing plugins
 call plug#begin('~/.vim/plugged')
@@ -55,12 +55,14 @@ let g:gruvbox_contrast_dark='hard'
 autocmd vimenter * ++nested colorscheme gruvbox
 
 " 24-bit (true-color) mode
+let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
+let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
 if (has("termguicolors"))
     set termguicolors
 endif
 
 " vimwiki config
-let g:vimwiki_list = [{'path': '~/vimwiki/',
+let g:vimwiki_list = [{'path': '~/Documents/vimwiki/',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
 
 " markdown-preview config
@@ -102,10 +104,15 @@ noremap <silent> <C-Right> :vertical resize -3<CR>
 noremap <silent> <C-Up> :resize +3<CR>
 noremap <silent> <C-Down> :resize -3<CR>
 
+" vim doesn't recognise CTRL key when running inside alacritty
+if (&term == "alacritty")
+    set term=xterm-256color
+endif
+
 " Automatically deletes all trailing whitespace and newlines at end of file on save
 autocmd BufWritePre * %s/\s\+$//e
 autocmd BufWritePre * %s/\n\+\%$//e
 
 " Coding styles
 autocmd FileType c set noexpandtab tabstop=8 softtabstop=8 shiftwidth=8
-autocmd FileType html,xml,css,ruby set tabstop=2 softtabstop=2 shiftwidth=2
+autocmd FileType html,xml,css,ruby,yaml set tabstop=2 softtabstop=2 shiftwidth=2
