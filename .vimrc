@@ -114,5 +114,8 @@ autocmd BufWritePre * %s/\s\+$//e
 autocmd BufWritePre * %s/\n\+\%$//e
 
 " Coding styles
+augroup FixHeaderFiles
+    autocmd! BufRead,BufNewFile *.h set filetype=c
+augroup END
 autocmd FileType c set noexpandtab tabstop=8 softtabstop=8 shiftwidth=8
 autocmd FileType html,xml,css,ruby,yaml set tabstop=2 softtabstop=2 shiftwidth=2
