@@ -1,0 +1,52 @@
+set previewer ~/.config/lf/lf_kitty_preview
+set cleaner ~/.config/lf/lf_kitty_clean
+
+#--------------------------------------------------------------------
+# Basics
+#--------------------------------------------------------------------
+set shell bash
+set shellopts '-eu'
+set ifs "\n"
+
+set hidden true
+set ignorecase true
+
+set cursorpreviewfmt "\033[7;2m"
+set icons true
+
+#--------------------------------------------------------------------
+# Custom commands
+#--------------------------------------------------------------------
+cmd unarchive ${{
+    set -f
+    case $f in
+        *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) tar xjvf $f;;
+        *.tar.gz|*.tgz) tar xzvf $f;;
+        *.tar.xz|*.txz) tar xJvf $f;;
+        *.zip) unzip $f;;
+        *.rar) unrar x $f;;
+        *.7z) 7z x $f;;
+    esac
+}}
+
+cmd archive ${{
+    set -f
+    printf "Archive name: "
+    read name
+    mkdir "$name"
+    cp -r $fx "$name"
+    printf "(1)zip or (2)tar: "
+    read input
+    case "$input" in
+	1) zip -r "$name.zip" "$name";;
+	2) tar czf "$name.tar.gz" "$name";;
+  	*) printf "Invalid input!\n"; exit 1;;
+    esac
+    rm -rf "$name"
+}}
+
+#--------------------------------------------------------------------
+# Key bindings
+#--------------------------------------------------------------------
+map au unarchive
+map ar archive
