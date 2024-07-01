@@ -1,0 +1,19 @@
+[user]
+        email = medkhalilelb@gmail.com
+        name = iamkhalil
+[colors]
+        ui = auto
+[core]
+        editor = nvim
+[pull]
+        rebase = true
+[merge]
+        conflictStyle = diff3
+        tool = meld
+[mergetool]
+        prompt = false
+        keepBackup = false
+[alias]
+        tree = log --graph --decorate --pretty=oneline --abbrev-commit --all
+[init]
+        defaultBranch = main
