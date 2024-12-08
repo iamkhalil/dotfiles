@@ -274,7 +274,7 @@ require("lazy").setup({
   },
   {
     "nvim-treesitter/nvim-treesitter",
-    build = ":TSupdate",
+    build = ":TSUpdate",
     event = { "bufreadpre", "bufnewfile" },
     config = function()
       require("nvim-treesitter.install").prefer_git = true
