@@ -303,11 +303,11 @@ require("lazy").setup({
       })
     end,
   },
-  { -- Similar to Emacs Dired in the way he treats fs like a buffer
+  { -- Similar to Emacs Dired in the way it treats filesystem like a buffer
     "stevearc/oil.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
-      local detail = true
+      local details = true
       require("oil").setup({
         columns = {
           "icon",
@@ -322,8 +322,8 @@ require("lazy").setup({
           ["<leader>ll"] = {
             desc = "Toggle file detail view",
             callback = function()
-              detail = not detail
-              if detail then
+              details = not details
+              if details then
                 require("oil").set_columns({ "icon", "permissions", "size", "mtime" })
               else
                 require("oil").set_columns({ "icon" })
@@ -378,7 +378,7 @@ require("lazy").setup({
       local servers = { -- See `:help lspconfig-all` for a list of all the pre-configured LSPs
         clangd = {
           filetypes = {
-            -- "c",
+            "c",
             "cpp",
           },
         },
